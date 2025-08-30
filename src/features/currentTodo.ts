@@ -1,18 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { Todo } from '../types/Todo';
-import _ from 'cypress/types/lodash';
 
-const initialState = null as Todo | null;
+type CurrentTodoState = Todo | null;
+
+const initialState: CurrentTodoState = null;
 
 export const currentTodoSlice = createSlice({
   name: 'currentTodo',
   initialState,
-  reducers: {
+  reducers: { 
     setCurrentTodo: (_, action) => {
       return action.payload;
-    }
+    },
+    clearCurrentTodo: () => null,
   },
 });
 
-export const { setCurrentTodo } = currentTodoSlice.actions;
+export const { setCurrentTodo, clearCurrentTodo } = currentTodoSlice.actions;
 export default currentTodoSlice.reducer;
