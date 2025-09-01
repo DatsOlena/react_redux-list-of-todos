@@ -18,7 +18,6 @@ export const TodoFilter: React.FC = () => {
 
   const handleClear = () => {
     dispatch(setFilter({ query: '' }));
-    document.querySelector('input')!.value = '';
   };
 
   return (
@@ -28,7 +27,9 @@ export const TodoFilter: React.FC = () => {
     >
       <p className="control">
         <span className="select">
-          <select data-cy="statusSelect" onChange={handleStatusChange}>
+          <select data-cy="statusSelect"
+          value={filter.status} 
+          onChange={handleStatusChange}>
             <option value="all">All</option>
             <option value="active">Active</option>
             <option value="completed">Completed</option>
@@ -42,6 +43,7 @@ export const TodoFilter: React.FC = () => {
           type="text"
           className="input"
           placeholder="Search..."
+          value={filter.query}
           onChange={handleSearchChange}
         />
         <span className="icon is-left">
