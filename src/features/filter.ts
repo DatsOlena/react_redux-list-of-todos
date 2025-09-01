@@ -10,13 +10,7 @@ export const filterSlice = createSlice({
   initialState,
   reducers: {
     setFilter: (state, action) => {
-      const { query, status } = action.payload;
-
-      return {
-        ...state,
-        query,
-        status,
-      };
+      return { ...state, ...action.payload };
     },
   },
 });

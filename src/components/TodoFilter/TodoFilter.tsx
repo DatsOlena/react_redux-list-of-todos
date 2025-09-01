@@ -9,15 +9,15 @@ export const TodoFilter: React.FC = () => {
   const filter = useAppSelector(state => state.filter);
 
   const handleStatusChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    dispatch(setFilter({ ...filter, status: event.target.value }));
+    dispatch(setFilter({ status: event.target.value }));
   };
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(setFilter({ ...filter, query: event.target.value }));
+    dispatch(setFilter({ query: event.target.value }));
   };
 
   const handleClear = () => {
-    dispatch(setFilter({ ...filter, query: '' }));
+    dispatch(setFilter({ query: '' }));
     document.querySelector('input')!.value = '';
   };
 
