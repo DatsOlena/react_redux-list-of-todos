@@ -1,6 +1,10 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { setFilter } from '../../features/filter';
+import {
+  setFilterQuery,
+  setFilterStatus,
+  clearFilterQuery,
+} from '../../features/filter';
 import { useAppSelector } from '../../hooks/useAppSelector';
 
 export const TodoFilter: React.FC = () => {
@@ -9,15 +13,15 @@ export const TodoFilter: React.FC = () => {
   const filter = useAppSelector(state => state.filter);
 
   const handleStatusChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    dispatch(setFilter({ status: event.target.value }));
+    dispatch(setFilterStatus({ status: event.target.value }));
   };
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(setFilter({ query: event.target.value }));
+    dispatch(setFilterQuery({ query: event.target.value }));
   };
 
   const handleClear = () => {
-    dispatch(setFilter({ query: '' }));
+    dispatch(clearFilterQuery());
   };
 
   return (
