@@ -8,9 +8,30 @@ import { useAppSelector } from '../../hooks/useAppSelector';
 export const TodoList: React.FC = () => {
   const todos = useAppSelector(state => state.todos);
   const dispatch = useDispatch();
+  const { query, status } = useAppSelector(state => state.filter);
+
   const handleSelectTodo = (todo: Todo) => {
     dispatch(setCurrentTodo(todo));
   };
+
+  const getFilteredTodos = (
+    todos: Todo[],
+    { query, status }: { query: string; status: string },
+  ) => {
+    if (status === 'all') {
+      return todos.filter(todo =>
+        todo.title.toLowerCase().includes(query.toLowerCase()),
+      );
+    }
+
+    return todos.filter(
+      todo =>
+        todo.title.toLowerCase().includes(query.toLowerCase()) &&
+        (status === 'active' ? !todo.completed : todo.completed),
+    );
+  };
+
+  const filteredTodos = getFilteredTodos(todos, { query, status });
 
   return (
     <>
@@ -35,7 +56,7 @@ export const TodoList: React.FC = () => {
         </thead>
 
         <tbody>
-          {todos.map(todo => (
+          {filteredTodos.map(todo => (
             <tr data-cy="todo" key={todo.id}>
               <td className="is-vcentered">
                 {todo.completed && (
