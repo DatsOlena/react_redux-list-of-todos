@@ -3,17 +3,13 @@ import React from 'react';
 import { Todo } from '../../types/Todo';
 import { setCurrentTodo } from '../../features/currentTodo';
 import { useDispatch } from 'react-redux';
+import { useAppSelector } from '../../hooks/useAppSelector';
 
-type Props = {
-  todos: Todo[];
-};
-
-export const TodoList: React.FC<Props> = ({ todos }) => {
-
+export const TodoList: React.FC = () => {
+  const todos = useAppSelector(state => state.todos);
   const dispatch = useDispatch();
   const handleSelectTodo = (todo: Todo) => {
     dispatch(setCurrentTodo(todo));
-    console.log('Selected todo:', todo);
   };
 
   return (
@@ -58,7 +54,10 @@ export const TodoList: React.FC<Props> = ({ todos }) => {
                 </p>
               </td>
               <td className="has-text-right is-vcentered">
-                <button data-cy="selectButton" className="button" type="button"
+                <button
+                  data-cy="selectButton"
+                  className="button"
+                  type="button"
                   onClick={() => handleSelectTodo(todo)}
                 >
                   <span className="icon">
